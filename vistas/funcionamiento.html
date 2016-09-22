@@ -1,0 +1,77 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-sm-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+			<h1 class="centrado">¿Como Funciona la API?</h1>
+			<p>RolDB está diseñada sobre un pequeño servidor json creado por <a href="https://github.com/typicode">typicode</a>, este servidor json está diseñado para realizar pruebas pero ofrece todos lo que normalmente ofrece una API. La documentación del servidor está <a href="https://github.com/typicode/json-server">aqui</a> pero tambien se explican las más comunes a continuación.</p>
+			<p>En primer lugar vale la pena indicar que hay 2 direcciones principales:</p>
+				<ul>
+					<li><code>/jdr</code> Que es donde se encuentran los juegos de rol.</li>
+					<li><code>/books</code> Que es donde se encuentran los libros.</li>
+				</ul>
+			<p>Para acceder a una busqueda general se emplea <code>?q=</code> + Valor a buscar. Ejemplo</p>
+				<ul>
+					<li><code>/jdr?q=Mago</code></li>
+					<li><code>/books?q=basico</code></li>
+				</ul>
+			<p>Tambien es posible obtener resultados por pagina para evitar cargar un monton de elementos a la vez</p>
+				<ul>
+					<li><code>/jdr?_page=2</code> devolveria la pagina 2.</li>
+				</ul>
+			<p>Para buscar por un valor especifico basta se usa la siguiente formula </p>
+				<ul>
+					<li><code>/books?title=El Desollador</code> devuelve el libro solo si el titulo coincide 100%</li>
+					<li><code>/jdr?name=anima_like</code> devuelve todos los juegos que contengan anima</li> 
+				</ul>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-sm-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+			<h1>Ejemplo</h1>
+			<fieldset>
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<h4>Busqueda por Juego de Rol </h4>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-8 col-sm-7 col-sm-offset-1">
+						<input ng-model="juegoBuscar" class="form-control" placeholder="Juegos"></input>
+					</div>
+					<div class="col-xs-4 col-sm-3">
+						<button type="submit" class="btn btn-default btn-negro" ng-click="buscarJuego();">Buscar</button>
+					</div>
+				</div>
+			</fieldset>
+				<div class="row">
+					<div class="col-xs-12">
+						<div ng-show="jdr"><a ng-href="http://localhost:3000/jdr?q={{juegoBuscar}}">http://localhost:3000/jdr?q={{juegoBuscar}} </a></div>
+						<pre ng-show="jdr" ng-bind="jdr | json"></pre>		
+					</div>
+				</div>			
+			<br>
+			<fieldset>
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<h4>Busqueda por Libro </h4>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-8 col-sm-7 col-sm-offset-1">
+						<input ng-model="libroBuscar" class="form-control" placeholder="Libros"></input>
+					</div>
+					<div class="col-xs-4 col-sm-3">
+						<button type="submit" class="btn btn-default btn-negro" ng-click="buscarLibro();">Buscar</button>
+					</div>
+				</div>
+			</fieldset>
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<div ng-show="ldr"><a ng-href="http://localhost:3000/books?q={{libroBuscar}}">http://localhost:3000/books?q={{libroBuscar}} </a></div>
+						<pre ng-show="ldr" ng-bind="ldr | json"></pre>						
+					</div>
+				</div>
+		</div>
+	</div>
+
+</div>
+</br>

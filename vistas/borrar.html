@@ -1,0 +1,161 @@
+<!-- FUnciona de forma muy parecida a ACTUALIZAR, lo que hace es mostrar los datos del juego a elminar sin posibilidad de modificarlo, si se clickea el boton se le pregunta si esta seguro y si dice que si se borra definitivamente-->
+<div class="container" ng-init="buscarTodosLosJuegos(); buscarTodosLosLibros();">
+	<div class="row">
+		<div class="col-xs-12 col-sm-8">	
+			<h1>Borrar Juegos y Libros</h1>
+			<p>¿La has pificado añadiendo algun juego que no debias? ¡Algun usuario malintencionado ha añadido algo inapropiado? ¡Esta es tu sección, borra los juegos o libros que no sean adecuados.</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-4">
+			<h4>Juegos</h4>
+			<select ng-options="x.name for x in todosLosJuegos" class="form-control" ng-model="juegoSeleccionado"></select>
+		</div>
+		<div class="col-xs-12 col-sm-4">
+			<h4>Libros</h4>
+			<select ng-options="x.title for x in todosLosLibros" class="form-control" ng-model="libroSeleccionado"></select>
+		</div>
+	</div>
+</br>
+	<div class="row" ng-show="juegoSeleccionado">
+		<div class="col-xs-12 col-sm-8">
+		<!--<form action="http://localhost:3000/jdr" method="POST" role="form" required="required"> -->
+		<form method="POST" enctype="multipart/form-data">
+				<legend>Borrar Juego</legend>
+				<div class="form-group">
+					<div clas="row">
+						<div class="col-xs-12 col-sm-4">
+							<label for="">Nombre:* </label>
+						</div>
+						<div class="col-xs-12 col-sm-8">
+							<input type="text" name="name" ng-model="juegoSeleccionado.name" disabled="disabled" class="form-control"/>
+						</div>	
+					</div>
+					<div clas="row">
+						<div class="col-xs-12 col-sm-4">
+							<label for="">Logo:* </label>
+						</div>
+						<div class="col-xs-12 col-sm-8">
+							<img class="img-responsive" ng-src="{{juegoSeleccionado.logo}}"></img>
+						</div>	
+					</div>
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<button class="btn btn-default btn-negro" md-confirm="borrarDatosJuego()" md-confirm-click="¿Estas segur@ que deseas borrar el juego?" ng-disabled="juegoBorrado">Borrar </button>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<span ng-show="juegoBorrado">El juego {{juegoSeleccionado.name}} ha sido eliminado de la base de datos correctamente.</span>
+						</div>
+					</div>
+				</div>
+			</form>	
+		</div>
+	</div>
+	<div class="row" ng-show="libroSeleccionado">
+		<div class="col-xs-12 col-sm-8">
+			<form method="POST" role="form">
+			<legend>Borra un Libro</legend>
+			<div class="form-group">
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Nombre del Libro:</label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<input type="text" class="form-control" ng-model="libroSeleccionado.title" disabled="disabled">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Edición:</label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<input type="text" class="form-control"  ng-model="libroSeleccionado.edition" disabled="disabled">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Saga de Juegos:</label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<input type="text" class="form-control" ng-model="libroSeleccionado.rpg" disabled="disabled">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Tipo de Libro: </label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<input type="text" name="type" ng-model="libroSeleccionado.type" class="form-control" disabled="disabled">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Sistema de Juego: </label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<input type="text" class="form-control" ng-model="libroSeleccionado.system" disabled="disabled">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Autor/es: </label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<input type="text" ng-model="libroSeleccionado.autors" class="form-control" disabled="disabled">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Ilustrador/es: </label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<input type="text" ng-model="libroSeleccionado.ilustrators" class="form-control" disabled="disabled">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Fecha de Salida: </label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<input type="datetime_local" class="form-control" ng-model="libroSeleccionado.release_date" disabled="disabled">
+					</div>
+				</div>				
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Numero de Paginas: </label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<input type="number" ng-model="libroSeleccionado.pages_num"  class="form-control" disabled="disabled">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Resumen: </label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<textarea  rows="10" ng-model="libroSeleccionado.overview" class="form-control" disabled="disabled" ></textarea>
+				</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Portada: </label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<img class="img-responsive" ng-src="{{libroSeleccionado.cover}}"></img>
+					</div>
+				</div>
+			</div>
+			<!--<button type="submit" class="btn btn-default btn-negro">Enviar</button>-->
+				<button  class="btn btn-default btn-negro" md-confirm="borrarDatosLibro()" md-confirm-click="¿Estas segur@ que deseas borrar el libro?" ng-disabled="libroBorrado">Borrar</button>
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<span ng-show="libroBorrado">El libro {{libroSeleccionado.title}} ha sido eliminado de la base de datos correctamente.</span>
+						</div>
+					</div>
+		</form>
+		</div>
+	</div>
+</div>
+

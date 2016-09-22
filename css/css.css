@@ -1,0 +1,98 @@
+.jumbotron > .container > .stroke {
+	text-align: center;
+	color: white;
+	font-family: Georgia, serif;
+	font-weight: bold;
+	letter-spacing: 0;
+	text-shadow: -2px -2px 2px #333, 2px -2px 2px #333, -2px 2px 2px #333, 2px 2px 2px #333;
+	opacity: 2;
+}
+.jumbotron {
+  background-image: url();
+}
+
+.cabecera-presentacion {
+  text-align: center;
+}
+.parro-presentacion {
+  text-align: justify;
+}
+.centrado {
+  text-align: center;
+}
+
+.imagen-parrafo {
+  display: inline-block;
+  max-height: 100px;
+  border-radius: 50%;
+  float: left;
+}
+.alin-centrado {
+  vertical-align: center;
+}
+.clickeable {
+  cursor: pointer;
+}
+div p {
+  text-align: justify;;
+}
+tbody {
+  text-align: center;
+}
+
+fieldset {
+  border-radius: 5px;
+  background-color: #E5E5E5;
+  padding: 10px;
+}
+.btn-negro {
+  background-color: black;
+  color: white;
+}
+.panel-heading {
+  font-weight: bold;
+  text-align: center;
+}
+.negrita {
+  font-weight: bold;
+}
+.resaltado {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+a{
+  color: #890000
+}
+a:hover {
+  text-decoration:underline;
+  color:#AC0000;}
+
+.logo{
+  font-weight: bold;
+}
+/* Genera los triangulitos de arriba y abajo */
+.sortorder:after {
+  content: '\25b2';   // BLACK UP-POINTING TRIANGLE
+}
+.sortorder.reverse:after {
+  content: '\25bc';   // BLACK DOWN-POINTING TRIANGLE
+}
+
+ /* Remove the navbar's default rounded borders and increase the bottom margin */
+    .navbar {
+      margin-bottom: 50px;
+      border-radius: 0;
+    }
+    
+    /* Remove the jumbotron's default bottom margin */
+     .jumbotron {
+      margin-bottom: 0;
+    }
+   
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+
+

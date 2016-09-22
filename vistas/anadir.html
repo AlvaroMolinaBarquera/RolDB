@@ -1,0 +1,151 @@
+<!--Esqueleto de la API, lo que hace es enviar a l servidor lso datos del libro o juego, los botones de enviar se deshabilitan cuando no estan los datos relleanos o cuando se ha enviado con exito la petición al servidor. -->
+<div class="container" ng-init="buscarTodosLosJuegos(); buscarTodosLosLibros();">
+	<div class="row">
+		<div class="col-xs-12 col-sm-8">	
+			<h1>Añade juegos o libros</h1>
+			<p>Colabora con la API añadiendo los libros o los juegos de rol que tu conozcas.</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-8">
+		<form method="POST" enctype="multipart/form-data" name="formularioAnadirJuego">
+				<legend>Añade un Juego</legend>
+				<div class="form-group">
+					<div clas="row">
+						<div class="col-xs-12 col-sm-4">
+							<label for="">Nombre: </label>
+						</div>
+						<div class="col-xs-12 col-sm-8">
+							<input type="text" name="name" required="required" uib-popover="¡Campo Obligatorio!" popover-trigger="'focus'"  ng-model="jdr.name" class="form-control"/>
+						</div>	
+					</div>
+					<div clas="row">
+						<div class="col-xs-12 col-sm-4">
+							<label for="">Logo: </label>
+						</div>
+						<div class="col-xs-12 col-sm-8">
+							<input type="file" name="logo" accept="image/*" uib-popover="¡Campo Obligatorio!" popover-trigger="'focus'"  required="required" fileread="jdr.logo"/>
+							<img class="img-responsive" ng-src="{{jdr.logo}}" ></img>
+						</div>	
+					</div>
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<button class="btn btn-default btn-negro" ng-click="enviarDatosJuego()" ng-disabled="!juegoValido() || juegoEnviado">Enviar </button>
+						</div>
+					</div>
+				</div>
+			</form>	
+		</div>
+		<div class="col-xs-12 col-sm-4">
+			<label> Ultimo JdR Añadido: </label>
+			<pre ng-bind="todosLosJDR[todosLosJDR.length-1] | json"></pre>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-8">
+			<form method="POST" role="form" name="formularioAnadirLibro">
+			<legend>Añade un Libro</legend>
+			<div class="form-group">
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Nombre del Libro:</label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<input type="text" class="form-control" uib-popover="¡Campo Obligatorio!" popover-trigger="'focus'"  name="title" ng-model="books.title" ng-required placeholder="Ejemplo: Mago: La Ascensión, La Leyenda de los 5 Anillos ">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Edición:</label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<input type="text" class="form-control" name="edition" uib-popover="¡Campo Obligatorio!" popover-trigger="'focus'"  ng-model="books.edition" placeholder="Ejemplo: Edición 20º Aniversario, 1ª Edición ">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Saga de Juegos:</label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<select class="form-control"  name="rpg" uib-popover="¡Campo Obligatorio!" popover-trigger="'focus'"  required="required" ng-model="books.rpg" ng-options="x.name as x.name for x in todosLosJDR"></select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Tipo de Libro:</label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<input type="text" name="type" ng-model="books.type" uib-popover="¡Campo Obligatorio!" popover-trigger="'focus'"  required="required" class="form-control" id="" placeholder="Ejemplos: Manual Basico, Escenario de Campaña, Guia de Juego">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Sistema de Juego: </label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<input type="text" name="system" class="form-control" ng-model="books.system" placeholder="Ejemplo: Hitos, d20, Sistema Narrativo">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Autor/es: </label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<input type="text" name="autors" ng-model="books.autors" class="form-control" placeholder="Ejemplo: ">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Ilustrador/es: </label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<input type="text" name="ilustrators" ng-model="books.ilustrators" class="form-control" id="" placeholder="Ejemplo: Javier Charro, Luis Royo">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Fecha de Salida: </label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<input type="date" name="release_date" class="form-control" ng-model="books.release_date">
+					</div>
+				</div>				
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Numero de Paginas: </label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<input type="number" name="pages_num" ng-model="books.pages_num" min="1" max="1000" class="form-control" id="" placeholder="Ejemplo: 300">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Resumen: </label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<textarea  rows="10" name="overview" ng-model="books.overview" class="form-control" placeholder="Ejemplo: El juego de rol Anima: Beyond Fantasy y el mundo de Gaia te sumergen en una ambientación de fantasía que combina lo místico con lo realista, la verdad con las mentiras y la luz con las tinieblas.
+
+						Es un lugar que se adapta al estilo de cualquier grupo de jugadores, donde podrás encarnar desde meros rateros a poderosas entidades sobrenaturales. Gaia trata de reflejar el espíritu de las grandes sagas épicas de rol japonesas con el estilo de juego occidental. Te ofrece la posibilidad de ser partícipe de su historia e involucrarte en lo más profundo de sus raíces. Es una tierra llena de misterios y aventuras, donde el hombre ha relegado lo sobrenatural a mitos, simples cuentos para asustar a los niños."></textarea>
+				</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Portada: </label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<input type="file" name="cover" fileread="books.cover">
+						<img class="img-responsive" ng-src="{{books.cover}}" ></img>
+					</div>
+				</div>
+			</div>
+			<!--<button type="submit" class="btn btn-default btn-negro">Enviar</button>-->
+				<button class="btn btn-default btn-negro" ng-click="enviarDatosLibro()" ng-disabled="!libroValido() || libroEnviado">Enviar</button>
+		</form>
+		</div>
+		<div class="col-xs-12 col-sm-4">
+			<label> Ultimo Libro Añadido: </label>
+			<pre ng-bind="todosLosLibros[todosLosLibros.length-1] | json"></pre>
+		</div>
+	</div>
+</div>
+

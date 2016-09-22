@@ -1,0 +1,24 @@
+<div class="container-fluid" ng-init="buscarLibroPorId()">
+	<div class="col-xs-12 col-sm-8 col-sm-offset-2">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<td><h4 class="negrita cabecera-presentacion">Titulo</h4></td>
+					<td><h4 class="negrita cabecera-presentacion">Saga</h4></td>
+					<td><h4 class="negrita cabecera-presentacion">Tipo</h4></td>
+					<td><h4 class="negrita cabecera-presentacion">Num. Paginas</h4></td>
+					<td><h4 class="negrita cabecera-presentacion">Num. Palabras</h4></td>
+				</tr>
+			</thead>
+			<tbody ng-repeat="libro in librosTraducidos | orderBy:'num_palabras':true">
+				<tr>
+					<td><a target="_blank" ng-href="#/explorar/libros/{{libro.id}}">{{libro.title}}</a></td>
+					<td>{{libro.rpg}}</td>	
+					<td>{{libro.type}}</td>
+					<td>{{libro.pages_num}}</td>
+					<td>{{libro.num_palabras | number}}</td>
+				</tr>	
+			</tbody>
+		</table>
+	</div>
+</div>

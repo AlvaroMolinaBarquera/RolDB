@@ -1,0 +1,26 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-xs-12 col-sm-10 col-sm-offset-1">
+			<div ng-repeat="editorial in listaDeEditoriales" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title"><a target="_blank" ng-href="{{editorial.pagina_web}}">{{editorial.nombre}}<a/></h3>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-xs-5">
+								<img class="img-responsive" ng-src="{{editorial.logo}}"></img>
+							</div>
+							<div class="col-xs-7">
+								<div ng-show="{{editorial.direccion}}"><span class="negrita">Dirección: </span>{{editorial.direccion}}</div>
+								<div ng-show="{{editorial.telefono}}"><span class="negrita">Tlf: </span>{{editorial.telefono}}</div>
+								<div ng-show="{{editorial.email}}"><span class="negrita">Email: </span>{{editorial.email}}</div>
+								<div ng-show="{{editorial.pagina_web}}"><span class="negrita">Web: </span><a target="_blank" ng-href="{{editorial.pagina_web}}">{{editorial.pagina_web}}</a></div>	
+							</div>
+						</div>
+					</div>	
+				</div>
+			</div>	
+		</div>
+	</div>
+</div>

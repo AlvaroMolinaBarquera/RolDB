@@ -1,0 +1,62 @@
+	<!DOCTYPE html>
+<html ng-app="miAplicacion">
+	<head>
+		<title>Rol DataBase</title>
+		<meta charset="utf-8">
+
+		<link rel="stylesheet"  href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/css.css">
+    <link type="text/plain" href="prueba.txt">
+	</head>
+<body>
+  <div class="jumbotron"> <!-- Empieza el Jumbotron -->
+    <div class="container text-center">
+      <h1 class="stroke">RolDB</h1>
+      <p class="stroke">La Primera Base de Datos para JdR</p>
+    </div>
+  </div> <!-- Acaba el Jumbotron -->
+<barra-navegacion> </barra-navegacion>  
+
+
+  <!-- Vista -->
+  <div ng-view> </div>
+  <!-- Vista -->
+
+  <footer class="container-fluid text-center"> <!-- Pie de Pagina, meramente decorativos -->
+    <p>(cc) Copyright</p>
+    <form class="form-inline">Suscribete:
+      <input type="email" class="form-control" size="50" placeholder="Dirección de e-Mail">
+      <button type="button" class="btn btn-default btn-negro">Enviar</button>
+    </form>
+</footer>
+
+
+
+	<!-- Librerias -->
+		<script src="js/vendor/jquery-2.2.4.min.js"></script> <!-- Necesitamos JQuery para Bootstrap -->
+		<script src="js/vendor/bootstrap.min.js"></script>
+
+
+		<script src="js/vendor/angular.min.js"></script>
+		<script src="js/vendor/angular-route.min.js"></script>
+		<script src="js/vendor/ui-bootstrap-tpls-2.0.2.min.js"> </script> <!-- Permite cosas como la paginaión -->
+		<script src="js/vendor/angular-touch.min.js"></script>	<!-- Necesario para ui-bootstrap -->
+		<script src="js/vendor/angular-animate.min.js"></script> <!-- Necesario para ui-bootstrap -->
+
+
+
+
+
+		
+
+	<!-- Scripts -->
+    <script src="js/app.js"></script>
+    <script src="js/controladores/apiCtrl.js"></script>
+    <script src="js/controladores/moduloSubirArchivo.js"></script>
+    <script src="js/controladores/directivas.js"></script>
+    <script src="js/controladores/moduloLanzadorDeDados.js"></script>
+
+
+
+	</body>
+</html>

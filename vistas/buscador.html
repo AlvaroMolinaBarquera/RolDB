@@ -1,0 +1,81 @@
+<!-- Buscador de la API, busca los juegos o los libros por su nombre, su autor o su saga, pudiendo especificar si la busqueda es especifica o no, luego muestra los resultados en función de una cosa u otra. -->
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+			<legend>Busca Libros o Juegos</legend>
+		</div>
+	</div>
+	<div class="row well">
+		<form form action="" method="POST" role="form">
+			<div class="form-group">
+				<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-3">
+					<input type="text" class="form-control" ng-model="valor" required="required"></inpu>
+				</div>
+				<div class="col-xs-12 col-sm-4  col-md-2">
+					<select ng-model="buscar" class="form-control" required="required">
+						<option value="jdr">Juegos de Rol</option>
+						<option value="books">Libros</option>
+					</select>
+				</div>
+				<div class="col-xs-12 col-sm-4 col-md-3">
+					<select ng-model="por" class="form-control" ng-show="buscar == 'books'">
+						<option value="title">Titulo</option>
+						<option value="rpg">Saga</option>
+						<option value="edition">Edición</option>
+						<option value="type">Tipo</option>
+						<option value="autors">Autores</option>
+						<option value="ilustrators">Ilustradores</option>
+
+				</select>
+				</div>
+				<div class="col-xs-12 col-sm-4 col-md-2">
+					<select ng-model="restriccion" class="form-control" uib-popover="No recomiendo la busqueda estricta y si la escoges ¡Cuidado con los acentos!" popover-trigger="'focus'">
+						<option value="">Estricta</option>
+						<option value="_like">Contenido</option>
+					</select>
+				</div>
+				<div class="col-xs-12 col-sm-4 col-sm-offset-4 col-md-2">
+					<button type="button" class="btn btn-default btn-negro" ng-click="buscarCualquierCosa()">Buscar</button>
+				</div>
+			</div>
+		</form>		
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-6" ng-repeat="libro in librosBuscados">
+		    <div class="panel panel-default" >
+			    <div class="panel-heading">
+			        <h3 class="panel-title negrita">{{libro.title}}</h3>
+			    </div>
+			    <div class="panel-body">
+			    <div class="col-xs-10 col-sm-4 col-xs-offset-1">
+			        <img ng-src="{{libro.cover}}" class="img-responsive imagen-poster" alt="Image"/>
+			    </div>
+			    <div class="col-xs-12 col-sm-7">
+					<div ng-show="libro.autors"><span class="negrita">Autores: </span> {{libro.autors}} </div>
+					<div ng-show="libro.ilustrators"><span class="negrita">Ilustradores: </span> {{libro.ilustrators}} </div>
+			        <div ng-show="libro.rpg"><span class="negrita">JdR: </span> {{libro.rpg}} </div>
+   			        <div ng-show="libro.type"><span class="negrita">Tipo: </span> {{libro.type}} </div>
+   			        <div ng-show="libro.system"><span class="negrita">Sistema:</span> {{libro.system}} </div>
+			        <div ng-show="libro.pages_num"><span class="negrita">Numero de Paginas: </span> {{libro.pages_num | number}} </div>
+			        <div ng-show="libro.release_date"><span class="negrita">Fecha de Salida:</span> {{libro.release_date | date}} </div>
+   			        <div ng-show="libro.edition"><span class="negrita">Edición: </span> {{libro.edition}} </div>
+			        <div ng-show="libro.overview"><span class="negrita">Resumen:</span> {{libro.overview}} </div>
+			    </div>
+		    </div>
+ 		</div>
+
+	</div>
+	<div class="row">
+		<div class="col-xs- col-sm- col-md- col-lg-">
+			<div ng-repeat="juego in juegosBuscados" class="col-xs-12 col-sm-4 col-md-3">
+				<div class="panel panel-default clickeable">
+					<div class="panel-heading"><a ng-href="#/explorar/juegos/{{juego.id}}">{{juego.name}}</a></div>
+					<div class="panel-body">
+							<img class="img-responsive" ng-src="{{juego.logo}}"></img>
+					</div>
+				</div>
+			</div>	
+		</div>
+	</div>
+</div>
+

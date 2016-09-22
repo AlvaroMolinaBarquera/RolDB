@@ -1,0 +1,57 @@
+<!--Barra de navegación, incluye gracias a bootstrap y uibootstrap dropdowns y una zona para comprimir los datos -->
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand logo" href="#/">RolDB</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav" >
+        <li class="active" uib-dropdown>
+          <a href="#/" uib-dropdown-toggle>Sobre Mi<span class="caret"></span></a>
+          <ul uib-dropdown-menu>
+            <li><a href="#/">Presentacion</a></li>
+         
+            <li><a href="#/traducciones">Libros Traducidos</a></li>
+          </ul>
+
+        </li>
+        <li uib-dropdown>
+          <a uib-dropdown-toggle href="#/explorar">Explorar <span class="caret"></span></a>
+          <ul uib-dropdown-menu>
+            <li><a href="#/explorar/buscador">Buscador Avanzado</a></li>
+            <li><a href="#/explorar/juegos">Todos los Juegos</a></li>
+            <li><a href="#/explorar/libros">Todos los Libros</a></li>
+          </ul>
+        </li>  
+        <li uib-dropdown>
+        <a href="#/modificar" uib-dropdown-toggle>API <span class="caret"></span></a>
+        <ul uib-dropdown-menu>
+          <li><a href="#/api/funcionamiento">Funcionamiento</a></li>
+          <li><a href="#/api/anadir">Añadir</a></li>
+          <li><a href="#/api/actualizar">Actualizar</a></li>
+          <li><a href="#/api/borrar">Borrar</a></li>
+        </ul>
+
+
+        </li>
+        <li uib-dropdown>
+          <a href="#/recursos" uib-dropdown-toggle> Recursos <span class="caret"></span></a>
+          <ul uib-dropdown-menu>
+            <li><a href="#/recursos/lanzadorDeDados">Lanzador de Dados</a></li>
+            <li><a href="#/recursos/editoriales">Editoriales</a></li>
+            <li><a href="#/recursos/informacion">Informacion</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a target="_blank" class="negrita" href="https://www.paypal.me/RolDB"> Donar </a> </li>
+        <li><a href="#/contacto">Contacto</a></li>
+      </ul>  
+     </div>
+  </div>
+</nav>

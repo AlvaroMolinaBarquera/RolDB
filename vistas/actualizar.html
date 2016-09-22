@@ -1,0 +1,163 @@
+<!-- Toda la vista recoge los datos de todos los juegos y todos los libros para mostrarlos en dos select, al hacerlo se rellenan los datos correspondientes al juego seleccionado para al actualizar recurrir al metodo PATCH de la petición HTTP -->
+<div class="container" ng-init="buscarTodosLosJuegos(); buscarTodosLosLibros();">
+	<div class="row">
+		<div class="col-xs-12 col-sm-8">	
+			<h1>Actualizar Juegos y Libros</h1>
+			<p>¿Te has confundido al subir un pequeño detalle de un juego y lo quieres cambiar? ¿Resulta que ese detalle que creias de una forma no es asi de verdad? Aqui podras actualizar la base de datos, simplemente modifica o elimina cualquiera de los campos.</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12 col-sm-4">
+			<h4>Juegos</h4>
+			<select ng-options="x.name for x in todosLosJuegos" class="form-control" ng-model="juegoSeleccionado"></select>
+		</div>
+		<div class="col-xs-12 col-sm-4">
+			<h4>Libros</h4>
+			<select ng-options="x.title for x in todosLosLibros" class="form-control" ng-model="libroSeleccionado"></select>
+		</div>
+	</div>
+</br>
+	<div class="row" ng-show="juegoSeleccionado">
+		<div class="col-xs-12 col-sm-8">
+		<!--<form action="http://localhost:3000/jdr" method="POST" role="form" required="required"> -->
+		<form method="POST" enctype="multipart/form-data" name="formularioActualizarJuego">
+				<legend>Actualizar Juego</legend>
+				<div class="form-group">
+					<div clas="row">
+						<div class="col-xs-12 col-sm-4">
+							<label for="">Nombre:* </label>
+						</div>
+						<div class="col-xs-12 col-sm-8">
+							<input type="text" name="name" uib-popover="¡Campo Obligatorio!" popover-trigger="'focus'"  ng-model="juegoSeleccionado.name" class="form-control"/>
+						</div>	
+					</div>
+					<div clas="row">
+						<div class="col-xs-12 col-sm-4">
+							<label for="">Logo:* </label>
+						</div>
+						<div class="col-xs-12 col-sm-8">
+							<input type="file" name="logo" uib-popover="¡Campo Obligatorio!" popover-trigger="'focus'" accept="image/*" fileread="juegoSeleccionado.logo" ng-file-select="onFileSelect($files)"/>
+							<img class="img-responsive" ng-src="{{juegoSeleccionado.logo}}"></img>
+						</div>	
+					</div>
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<button class="btn btn-default btn-negro" ng-click="actualizarDatosJuego()" ng-disabled="!juegoValido() || juegoActualizado">Actualizar </button>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<span ng-show="juegoActualizado">El juego {{juegoSeleccionado.name}} se ha actualizado correctamente.</span>
+						</div>
+					</div>
+				</div>
+			</form>	
+		</div>
+	</div>
+	<div class="row" ng-show="libroSeleccionado">
+		<div class="col-xs-12 col-sm-8">
+			<form method="POST" role="form" name="formularioActualizarLibro">
+			<legend>Actualizar un Libro</legend>
+			<div class="form-group">
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Nombre del Libro:</label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<input uib-popover="¡Campo Obligatorio!"  popover-trigger="'focus'" type="text" class="form-control" ng-model="libroSeleccionado.title">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Edición:</label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<input type="text" uib-popover="¡Campo Obligatorio!" popover-trigger="'focus'" class="form-control"  ng-model="libroSeleccionado.edition">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Saga de Juegos:</label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<select class="form-control" uib-popover="¡Campo Obligatorio!" popover-trigger="'focus'"   name="rpg" required="required" ng-model="libroSeleccionado.rpg" ng-options="x.name as x.name for x in todosLosJuegos"></select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Tipo de Libro:</label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<input type="text" name="type" uib-popover="¡Campo Obligatorio!" popover-trigger="'focus'"  ng-model="libroSeleccionado.type" class="form-control">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Sistema de Juego: </label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<input type="text" class="form-control" ng-model="libroSeleccionado.system">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Autor/es: </label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<input type="text" ng-model="libroSeleccionado.autors" class="form-control">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Ilustrador/es: </label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<input type="text" ng-model="libroSeleccionado.ilustrators" class="form-control">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Fecha de Salida: </label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<input type="datetime_local" class="form-control" ng-model="libroSeleccionado.release_date">
+					</div>
+				</div>				
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Numero de Paginas: </label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<input type="number" ng-model="libroSeleccionado.pages_num"  class="form-control">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Resumen: </label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<textarea  rows="10" ng-model="libroSeleccionado.overview" class="form-control"></textarea>
+				</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<label for="">Portada: </label>
+					</div>
+					<div class="col-xs-12 col-sm-8">
+						<input type="file" name="logo" accept="image/*" fileread="libroSeleccionado.cover"/>					
+						<img class="img-responsive" ng-src="{{libroSeleccionado.cover}}"></img>
+					</div>
+				</div>
+			</div>
+			<!--<button type="submit" class="btn btn-default btn-negro">Enviar</button>-->
+				<button  class="btn btn-default btn-negro" ng-click="actualizarDatosLibro()" ng-disabled="!libroValido() || libroActualizado">Actualizar</button>
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<span ng-show="libroActualizado">El libro {{libroSeleccionado.title}} ha sido actualizado correctamente.</span>
+						</div>
+					</div>
+		</form>
+		</div>
+	</div>
+</div>
+

@@ -1,0 +1,84 @@
+<div class="container-fluid">
+	<form role="form" name="tiradorDados" ng-model="tiradorDados" class="col-xs-12 col-sm-6 col-md-4 col-sm-offset-3 col-md-offset-4">
+		<legend>Lanzador de Dados</legend>
+		<div class="form-group col-xs-12 col-sm-6 col-md-4">
+				
+			<div class="row">
+               		<div class="col-xs-4">
+                    	<img src="imagenes/d4a.jpg" class="img-responsive"></img>
+                    </div>
+              		 <div class="col-xs-8">
+                    	<input type="number" name="d4" ng-model="dado.d4" class="form-control" value="" min="0" max="999" step="">
+                	</div>
+			</div>
+			<div class="row">
+               		<div class="col-xs-4">
+                    	<img src="imagenes/d6a.jpg" class="img-responsive"></img>
+                    </div>
+              		 <div class="col-xs-8">
+                    	<input type="number" name="d6" ng-model="dado.d6" class="form-control" value="" min="0" max="999" step="">
+                	</div>
+			</div>
+			<div class="row">
+               		<div class="col-xs-4">
+                    	<img src="imagenes/d8a.jpg" class="img-responsive"></img>
+                    </div>
+              		 <div class="col-xs-8">
+                    	<input type="number" name="d8" ng-model="dado.d8"class="form-control" value="" min="0" max="999" step="">
+                	</div>
+           	</div>
+			<div class="row">
+               		<div class="col-xs-4">
+                    	<img src="imagenes/d10a.jpg" class="img-responsive"></img>
+                    </div>
+              		 <div class="col-xs-8">
+                    	<input type="number" name="d10" ng-model="dado.d10" class="form-control" value="" min="0" max="999" step="">
+                	</div>
+			</div>
+			<div class="row">
+               		<div class="col-xs-4">
+                    	<img src="imagenes/d12a.jpg" class="img-responsive"></img>
+                    </div>
+              		 <div class="col-xs-8">
+                    	<input type="number" name="d12" ng-model="dado.d12" class="form-control" value="" min="0" max="999" step="">
+                	</div>
+           	</div>
+			<div class="row">
+               		<div class="col-xs-4">
+                    	<img src="imagenes/d20a.jpg" class="img-responsive"></img>
+                    </div>
+              		 <div class="col-xs-8">
+                    	<input type="number" name="d20" ng-model="dado.d20"class="form-control" value="" min="0" max="999" step="">
+                	</div>
+			</div>
+			<div class="row">
+            		<div class="col-xs-4">
+                    	<img src="imagenes/d100a.jpg" class="img-responsive"></img>
+                    </div>
+              		 <div class="col-xs-8">
+                    	<input type="number" name="d100" ng-model="dado.d100" class="form-control" value="" min="0" max="999" step="">
+                	</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-6 col-md-8">
+			<div ng-repeat="x in resultadosDados"><span ng-show="{{x.resultado}}">
+				Has lanzado {{x.dadosLanzados}}{{x.dado}} y has obtenido {{x.resultado}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="col-xs-8 col-sm-4 col-xs-offset-2 col-sm-offset-4">
+					<button type="button" class="btn btn-default btn-negro" ng-click="lanzarDados();">Lanzar</button>
+				</div>
+			</div>
+		</div>
+		</div>		
+		
+
+
+		</div>	
+
+	</form>
+</div>
+</br>
+

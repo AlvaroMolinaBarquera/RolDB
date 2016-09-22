@@ -1,0 +1,50 @@
+<div class="container-fluid" ng-init="buscarJuegoPorId()">
+<div class="row">
+	<div class="col-xs-12 col-sm-6 col-md-4 col-sm-offset-3 col-md-offset-4">
+		<h2>{{juegoPorId.name}}</h2>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12 col-sm-6 col-md-4 col-sm-offset-3 col-md-offset-4">
+		<h2><img class="img-responsive" ng-src="{{juegoPorId.logo}}"></img></h2>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12">
+		<button type="button" class="btn btn-default btn-negro" ng-click="buscarLibrosPorJuego();" ng-hide="librosPorJuego">Mostrar Libros Asociados</button>
+		<legend ng-show="librosPorJuego">Libros Asociados</legend>
+	</div>
+	<div ng-show="librosPorJuego" class="col-xs-12 col-sm-2 col-sm-offset-5">
+		<input type="text" ng-model="f" class="form-control" placeholder="Filtrar resultados"></input>
+	</div>
+</div>
+</br>
+<div class="row" ng-show="librosPorJuego">
+	<div class="col-xs-12 col-sm-4 col-sm-offset-4">
+	    <button class="btn btn-default btn-negro" ng-click="sortBy('title')" >Titulo</button>
+	    <span class="sortorder" ng-show="propertyName === 'title'" ng-class="{reverse: reverse}"></span>
+	    <button class="btn btn-default btn-negro" ng-click="sortBy('release_date')" >Fecha de Publicación</button>
+	    <span class="sortorder" ng-show="propertyName === 'release_date'" ng-class="{reverse: reverse}"></span>
+	    <button class="btn btn-default btn-negro" ng-click="sortBy('edition')" >Edición</button>
+	    <span class="sortorder" ng-show="propertyName === 'edition'" ng-class="{reverse: reverse}"></span>
+	    <button class="btn btn-default btn-negro" ng-click="sortBy('page_num')" >Paginas</button>
+	    <span class="sortorder" ng-show="propertyName === 'page_num'" ng-class="{reverse: reverse}"></span>
+  	</div>
+</div>
+</div >
+	<div class="row">
+		<div class="col-xs-12">
+			<div ng-repeat="libro in librosPorJuego | filter:f | orderBy:propertyName:reverse" class="col-xs-12 col-sm-3 col-md-2">
+				<div class="panel panel-default clickeable" ng-click="openModal('lg')">
+					<div class="panel-heading"><a href="#/explorar/libros/{{libro.id}}">{{libro.title}}</a></div>
+					<div class="panel-body">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<img class="img-responsive" ng-src="{{libro.cover}}"></img>
+					</div>
+					</div>
+				</div>
+			</div>			
+		</div>
+	</div>
+</div>
+

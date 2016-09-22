@@ -1,0 +1,101 @@
+<!-- Input para introducir -->
+<div class="row">
+	<div class="col-xs-12 col-sm-2 col-md-1 col-sm-offset-4 col-md-offset-4">
+		<label>Filtrar: </label>
+	</div>
+	<div class="col-xs-12 col-sm-4 col-md-2">
+		<input type="text" ng-model="f" class="form-control" placeholder="Filtrar resultados"></input>
+	</div>
+</div>
+<br>
+<!--Checkboxs que mustran la miniatura o la tabla, la versión en tabla está marcada por defecto -->
+<div class="row">
+	<div class="col-xs-12 col-sm-2 col-md-1 col-sm-offset-4 col-md-offset-4">
+		<label>Visionarlos Como:</label>
+	</div>
+	<div class="col-xs-12 col-sm-2 col-md-2">
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" ng-model="mostrarTabla">
+					Tabla
+			</label>
+			<label>
+				<input type="checkbox" ng-model="mostrarMiniatura">
+					Miniatura
+			</label>
+		</div>
+	</div>
+</div>
+</br>
+<!--Sirve para ordenar de forma ascendente/descendente los titulos, la edición, etc. -->
+<div class="row">
+	<div class="col-xs-12 col-sm-4 col-sm-offset-4">
+	    <button class="btn btn-default btn-negro" ng-click="sortBy('title')" >Titulo</button>
+	    <span class="sortorder" ng-show="propertyName === 'title'" ng-class="{reverse: reverse}"></span>
+	    <button class="btn btn-default btn-negro" ng-click="sortBy('release_date')" >Fecha de Publicación</button>
+	    <span class="sortorder" ng-show="propertyName === 'release_date'" ng-class="{reverse: reverse}"></span>
+	    <button class="btn btn-default btn-negro" ng-click="sortBy('edition')" >Edición</button>
+	    <span class="sortorder" ng-show="propertyName === 'edition'" ng-class="{reverse: reverse}"></span>
+	    <button class="btn btn-default btn-negro" ng-click="sortBy('pages_num')" >Paginas</button>
+	    <span class="sortorder" ng-show="propertyName === 'pages_num'" ng-class="{reverse: reverse}"></span>
+	    <button class="btn btn-default btn-negro" ng-click="sortBy('type')" >Tipo</button>
+	    <span class="sortorder" ng-show="propertyName === 'type'" ng-class="{reverse: reverse}"></span>
+	    <button class="btn btn-default btn-negro" ng-click="sortBy('rpg')" >Saga</button>
+	    <span class="sortorder" ng-show="propertyName === 'rpg'" ng-class="{reverse: reverse}"></span>
+  	</div>
+</div>
+<br>
+<div class="row">
+	<div class="col-xs-12 col-sm-4 col-sm-offset-4">
+		<h4 ng-hide="todosLosLibros">Cargando todos los libros, puede tardar un rato...</h4>
+	</div>
+</div>
+<div class="container-fluid" ng-init="buscarTodosLosLibros();" ng-show="mostrarMiniatura && todosLosLibros">
+	<div class="row">
+		<div class="col-xs-12">
+			<div ng-repeat="libro in todosLosLibros | filter:f | orderBy:propertyName:reverse" class="col-xs-12 col-sm-4 col-lg-3">
+				<div class="panel panel-default clickeable" ng-click="openModal('lg')">
+					<div class="panel-heading"><a target="_blank" href="#/explorar/libros/{{libro.id}}">{{libro.title}}</a></div>
+					<div class="panel-body">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						<img class="img-responsive" ng-src="{{libro.cover}}"></img>
+					</div>
+					</div>
+				</div>
+			</div>			
+		</div> 
+	</div> 
+</div>
+<!-- Tabla que muestra los datos en formato de tabla para una consulta más rapida que la vista por miniaturas -->
+<div class="container-fluid" ng-show="mostrarTabla && todosLosLibros">
+	<table class="table table-striped"  >
+		<thead >
+			<tr>
+				<td><h4 class="negrita cabecera-presentacion">Titulo<h4></td>
+				<td><h4 class="negrita cabecera-presentacion">Saga</h4></td>
+				<td><h4 class="negrita cabecera-presentacion">Tipo</h4></td>
+				<td><h4 class="negrita cabecera-presentacion">Edición</h4></td>
+				<td><h4 class="negrita cabecera-presentacion">Sistema</h4></td>
+				<td><h4 class="negrita cabecera-presentacion">Autor/es</h4></td>
+				<td><h4 class="negrita cabecera-presentacion">Ilustrador/es</h4></td>
+				<td><h4 class="negrita cabecera-presentacion">F. Salida</h4></td>
+				<td><h4 class="negrita cabecera-presentacion">Num. Pags</h4></td> 
+			</tr>	
+		</thead>
+		<tbody ng-repeat="libro in todosLosLibros | filter:f | orderBy:propertyName:reverse" ng-click="openModal('lg')">
+			<tr class="clickeable">
+			<!--	<td><a target="_blank" href="#/explorar/libros/{{libro.id}}">{{libro.title}}</a></td> -->
+				<td><a target="_blank" href="#/explorar/libros/{{libro.id}}">{{libro.title}}</a></td>
+				<td>{{libro.rpg}}</td>
+				<td>{{libro.type}}</td>
+				<td>{{libro.edition}}</td>
+				<td>{{libro.system}}</td>
+				<td>{{libro.autors}}</td>
+				<td>{{libro.ilustrators}}</td>
+				<td>{{libro.release_date}}</td>
+				<td>{{libro.pages_num}}</td>
+			</tr>	 
+		</tbody>
+	</table>
+</div>
+
